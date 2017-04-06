@@ -25,6 +25,8 @@ app.use('/style', express.static(path.join(__dirname, '/style')));
 // get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();
 console.log(appEnv);
+
+
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -49,7 +51,7 @@ var conversation = watson.conversation({
 
 
 //Worskpace ID a ser mudado pelo seu Conversation
-var workspace = '271654e5-008e-486e-9242-c294be080bdc';
+var workspace = process.env.WORKSPACE_id || '271654e5-008e-486e-9242-c294be080bdc';
 
 
 app.post('/converse', function(req, res, next) {
